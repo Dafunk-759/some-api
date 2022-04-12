@@ -1,9 +1,5 @@
 import shell from "shelljs"
 
-const commitMessage =
-  process.argv[2] ??
-  `"commit-time: ${new Date().toLocaleString()}"`
-
 const pipe = (a, ...funs) =>
   funs.reduce((val, fn) => fn(val), a)
 
@@ -15,6 +11,14 @@ const chain = fn => preret => {
       return preret
   }
 }
+
+const commitMessage = pipe(
+  process.argv[2] ??
+    `commit at: ${new Date().toLocaleString()}`,
+  s => `"${s}"`
+)
+
+console.log(commitMessage)
 
 pipe(
   shell.exec("npm run format"),
