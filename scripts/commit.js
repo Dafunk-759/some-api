@@ -18,6 +18,8 @@ const commitMessage = pipe(
   s => `"${s}"`
 )
 
+// changes
+
 console.log(commitMessage)
 
 pipe(
