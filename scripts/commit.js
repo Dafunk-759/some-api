@@ -1,24 +1,23 @@
-import { exec } from "child_process"
+import shell from "shelljs"
 
-const rest = process.argv.slice(2)
+const commitMessage =
+  process.argv[2] ??
+  `"commit-time: ${new Date().toLocaleString()}"`
 
-const commends = [
-  "npm run format",
-  "git add .",
-  `git commit ${rest.join(" ")}`
-].join(" && ")
+const pipe = (a, ...funs) =>
+  funs.reduce((val, fn) => fn(val), a)
 
-console.log(commends)
-
-exec(commends, (err, stdout, stderr) => {
-  if (err) {
-    console.error(err)
-    return
+const chain = fn => preret => {
+  switch (preret.code) {
+    case 0:
+      return fn(preret)
+    case 1:
+      return preret
   }
+}
 
-  console.log(stdout)
-
-  if (stderr) {
-    console.log(stderr)
-  }
-})
+pipe(
+  shell.exec("npm run format"),
+  chain(() => shell.exec("git add .")),
+  chain(() => shell.exec("git commit -m " + commitMessage))
+)
