@@ -20,5 +20,5 @@ const { code } = shell.exec(
 )
 
 if (code !== 0) {
-  shell.exit(1)
+  shell.exit(code)
 }
