@@ -8,6 +8,8 @@ const commitMessage = (() => {
   return `"${s}"`
 })()
 
+//change
+
 const { code } = shell.exec(
   `
     npm run format;
