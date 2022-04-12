@@ -1,0 +1,14 @@
+{
+  "name": "some-api",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "format": "prettier --write .",
+    "tsc:w": "tsc -w"
+  },
+  "devDependencies": {
+    "@vercel/node": "^1.14.1",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  }
+}
