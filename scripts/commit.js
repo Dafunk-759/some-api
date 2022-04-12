@@ -1,10 +1,14 @@
 import { exec } from "child_process"
 
-process.argv.forEach((arg, i) => {
-  console.log(i, arg)
-})
+const rest = process.argv.slice(2)
 
-const commends = ["git --help"].join(";")
+const commends = [
+  "npm run format",
+  "git add .",
+  `git commit ${rest.join(" ")}`
+].join(" && ")
+
+console.log(commends)
 
 exec(commends, (err, stdout, stderr) => {
   if (err) {
