@@ -3,7 +3,7 @@ import type {
   VercelResponse
 } from "@vercel/node"
 
-export type Handler = (
+export type Handler<R> = (
   req: VercelRequest,
   res: VercelResponse
-) => void
+) => R
